@@ -1,0 +1,564 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"getCodM",
+				"getCodMensaje"
+			],
+			[
+				"mysql",
+				"mysql_error"
+			],
+			[
+				"session",
+				"session_start"
+			],
+			[
+				"SESSION",
+				"session_start"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "view/perfilUsuario.php",
+			"settings":
+			{
+				"buffer_size": 974,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "DATA/Persona.php",
+			"settings":
+			{
+				"buffer_size": 1462,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "DATA/operacionesDB.php",
+			"settings":
+			{
+				"buffer_size": 3793,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AC/comprobarLogin.php",
+			"settings":
+			{
+				"buffer_size": 967,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 1735,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AC/paginaRegistro.php",
+			"settings":
+			{
+				"buffer_size": 2366,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "view/cabecera.php",
+			"settings":
+			{
+				"buffer_size": 1058,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 524.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/H/Xampp/htdocs/PROYECTO",
+		"/H/Xampp/htdocs/PROYECTO/Business",
+		"/H/Xampp/htdocs/PROYECTO/DATA",
+		"/H/Xampp/htdocs/PROYECTO/media",
+		"/H/Xampp/htdocs/PROYECTO/resources",
+		"/H/Xampp/htdocs/PROYECTO/view"
+	],
+	"file_history":
+	[
+		"/H/Xampp/htdocs/PROYECTO/Business/insertMsg.php",
+		"/H/Xampp/htdocs/PROYECTO/view/newMsg.php",
+		"/H/Xampp/htdocs/PROYECTO/view/msgCabecera.php",
+		"/H/Xampp/htdocs/PROYECTO/Business/initMsg.php",
+		"/H/Xampp/htdocs/PROYECTO/Business/changeState.php",
+		"/H/Xampp/htdocs/PROYECTO/view/msgpage.php",
+		"/H/Xampp/htdocs/PROYECTO/view/principal.php",
+		"/H/Xampp/htdocs/PROYECTO/AC/registro.php",
+		"/H/Xampp/htdocs/PROYECTO/Business/deleteMsg.php",
+		"/H/Xampp/htdocs/DWEC/AJAX/getJSON/personas.php",
+		"/H/Xampp/htdocs/DWEC/AJAX/getJSON/cyberJSON.php",
+		"/H/Xampp/htdocs/PROYECTO/index.php",
+		"/H/Xampp/htdocs/PROYECTO/DATA/operacionesDB.php",
+		"/H/Xampp/htdocs/PROYECTO/view/cabecera.php",
+		"/H/Xampp/htdocs/PROYECTO/DATA/Mensaje.php",
+		"/H/Xampp/htdocs/DWEC/AJAX/Prueba1CRUD/php/listarPersonas.php",
+		"/H/Xampp/htdocs/DWEC/AJAX/Prueba1CRUD/php/creaUsuario.php",
+		"/H/Xampp/htdocs/DWEC/AJAX/PruebaAjaxJSON/index.html",
+		"/H/Xampp/htdocs/Tema5/VariablesDeAutentificacion/TiendaDwes/include/DB.php",
+		"/H/Xampp/htdocs/Tema5/VariablesDeAutentificacion/TiendaDwes/include/CestaCompra.php",
+		"/H/Xampp/htdocs/PROYECTO/view/principal2.php",
+		"/H/Xampp/htdocs/PROYECTO/DATA/Persona.php",
+		"/H/Xampp/htdocs/PROYECTO/DATA/connector.php",
+		"/H/Xampp/htdocs/PROYECTO/view/footer.php",
+		"/H/Xampp/htdocs/Tema5/VariablesDeAutentificacion/TiendaDwes/include/DB1.php",
+		"/H/Xampp/htdocs/Tema5/VariablesDeAutentificacion/TiendaDwes/productos.php",
+		"/H/Xampp/htdocs/Mysqli/SelectTiendasFamilias.php",
+		"/H/Xampp/htdocs/PROYECTO/AC/paginaRegistro.php",
+		"/H/Xampp/htdocs/PROYECTO/AC/login.php",
+		"/H/Xampp/htdocs/PROYECTO/AC/logout.php",
+		"/H/Xampp/htdocs/PROYECTO/proyecto.sublime-project",
+		"/H/Xampp/htdocs/DIW/FontsAwesome/prueba.html",
+		"/H/Xampp/htdocs/DIW/FontsAwesome/prueba2.html",
+		"/H/CosasDeSadmanPeter"
+	],
+	"find":
+	{
+		"height": 136.0
+	},
+	"find_in_files":
+	{
+		"height": 113.0,
+		"where_history":
+		[
+			"C:\\Users\\emanzano\\AppData\\Local\\Temp\\Rar$DRa1812.3460\\js"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"/**\n     * @param mixed /.*/\n     *\n     * @return self\n     */",
+			"/**\n     * @param mixed .*\n     *\n     * @return self\n     */",
+			"/**\n     * @return mixed\n     */",
+			"/**\n     * @param mixed $codUsuario\n     *\n     * @return self\n     */",
+			"form-control",
+			"\n     \n    }",
+			"return $this;",
+			"\t\t\t\t\t\t<div class=\"card-gorup\">\n\t\t\t\t\t\t\t<div class=\"card bg-dark text-white col-md-4\">\n\t\t\t\t\t\t\t\t<img class=\"card-img\" src=\"./media/img/prueba.jpg\" alt=\"Card image\">\n\t\t\t\t\t\t\t\t<div class=\"card-img-overlay\">\n\t\t\t\t\t\t\t\t\t<h5 class=\"card-title\">Card title</h5>\n\t\t\t\t\t\t\t\t\t<p class=\"card-text\">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>\n\t\t\t\t\t\t\t\t\t<p class=\"card-text\">Last updated 3 mins ago</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\t\t\t\t\t\t\t\n\t\t\t\t\t\t</div>\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "view/perfilUsuario.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 974,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								948,
+								948
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 208.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "DATA/Persona.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1462,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1131,
+								1138
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 966.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "DATA/operacionesDB.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3793,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1307,
+								1307
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 759.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "AC/comprobarLogin.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 967,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								903,
+								874
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "index.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1503,
+								1503
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "AC/paginaRegistro.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2366,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2269,
+								2269
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "view/cabecera.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1058,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								591,
+								598
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 43.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.xdebug":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "proyecto.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false,
+			"restore_index":
+			{
+				"18":
+				{
+					"group": 0,
+					"index": 0
+				},
+				"19":
+				{
+					"group": 0,
+					"index": 1
+				},
+				"20":
+				{
+					"group": 0,
+					"index": 3
+				},
+				"21":
+				{
+					"group": 0,
+					"index": 2
+				},
+				"61":
+				{
+					"group": 0,
+					"index": 4
+				}
+			},
+			"restore_layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			}
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 201.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
