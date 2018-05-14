@@ -1,0 +1,10 @@
+DbMANAGER.php :93// PUEDE QUE YA ESTÉ, REVISAR
+newMsg.js :67 // ARREGLADO
+msgView.php :(hacer la vista de las sugerencias)// DONE
+MsgController :77 //ARREGLADO 
+
+botonesSubastas.js : 29 
+AuctionController : 34
+SUBIDA DE IÁGENES Por Hacer
+PROBAR A CREAR UNA PANTALLA EMERGENTE PARA SUBIR LAS IMÁGENES (que se cierre al acabar).
+
