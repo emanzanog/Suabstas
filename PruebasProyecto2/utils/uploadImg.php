@@ -1,6 +1,6 @@
 <?php
 if(isset($_FILES['file'])){
-	$target = "..\\media\\img\\";
+	$target = "../media/img/";
 	$imgs = $_FILES['file'];
 	$nombres = [];
 	for ($i=0; $i < count($imgs['name']) ; $i++) { 
@@ -40,7 +40,8 @@ if(isset($_FILES['file'])){
 		// if everything is ok, try to upload file
 		} else {
 		    if (move_uploaded_file($imgs["tmp_name"][$i], $target_file)) {
-		        $nombres[] = $target_file;
+		    	$aux = str_replace("..",".",$target_file);
+		        $nombres[] = $aux;
 		    } else {
 		        echo "Sorry, there was an error uploading your file.";
 		        break;
@@ -61,6 +62,7 @@ function random_string($path,$length,$extension) {
     for ($i = 0; $i < $length; $i++) {
         $key .= $keys[array_rand($keys)];
     }
+
     $final = $path . $key . "." . $extension;
     if(file_exists($final)){
     	$final = random_string($path,$length,$extension);

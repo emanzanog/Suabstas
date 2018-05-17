@@ -4,6 +4,7 @@ require_once("../Model/objects/Usuario.php");
 require_once("../Model/objects/Mensaje.php");
 require_once("../Model/objects/Producto.php");
 require_once("../Model/objects/Subasta.php");
+require_once("../Model/objects/SubastaCompleta.php");
 require_once("../Model/objects/Puja.php");
 require_once("../Model/objects/Categoria.php");
 class DbManager{
@@ -91,7 +92,7 @@ class DbManager{
 	*/
 
 
-//HAY QUE ARREGLAR COSAS ======== ESTO YA TIENE MEJOR FORMA //CREO QUE YA ARREGLADO
+		//HAY QUE ARREGLAR COSAS ======== ESTO YA TIENE MEJOR FORMA //CREO QUE YA ARREGLADO
 	public static function buscaPersonas($codUsuario){
 		$connection = self::getConnection();
 		$emisores = "SELECT DISTINCT u.*  FROM Usuario u, Mensajes m WHERE m.CodEmisor = u.CodUsuario AND m.CodReceptor =".$codUsuario;
@@ -216,7 +217,7 @@ class DbManager{
 		return $producto;
 	}
 
-	public static function insertProducto($nombre, $precioInicial, $codVendedor, $categoria, $tipo = ""){
+	public static function insertProducto($nombre,$desc, $precioInicial, $codVendedor, $categoria, $tipo = ""){
 		$connection =  self::getConnection();
 
 		$sql = "INSERT INTO ";
@@ -232,8 +233,12 @@ class DbManager{
 				$sql .= "Producto ";
 				break;
 		}
-		$sql .= "(Nombre, PrecioInicial, CodVendedor, Categoria) VALUES ('".$nombre."', ".$precioInicial.", ".$codVendedor.", ".$categoria.")";
-		if($result= $connection->query($sql));
+		$sql .= "(Nombre,Descripcion, PrecioInicial, CodVendedor, Categoria) VALUES ('".$nombre."','".$desc."', ".$precioInicial.", ".$codVendedor.", ".$categoria.")";
+		if($result= $connection->query($sql)){
+			return $connection->insert_id;
+		}else{
+			return -1;
+		}
 
 	}
 
@@ -247,7 +252,7 @@ class DbManager{
 
 		$resDelete = $connection->query($delete);
 
-		$insert = self::insertProducto($prodcuto->getNombre(), $producto->getPrecioInicial(), $producto->getCodVendedor(), $prodcuto->getCategoria(), $tipo);
+		$insert = self::insertProducto($prodcuto->getNombre(),$producto->getDescripcion(), $producto->getPrecioInicial(), $producto->getCodVendedor(), $prodcuto->getCategoria(), $tipo);
 
 
 		return $connection->insert_id;
@@ -265,19 +270,10 @@ class DbManager{
 	*/
 
 	public static function getSubastaByCategoria($codCategoria){
-		//RECURSIVIDAD VER SI LA CATEGORIA ESPECIFICADA TIENE HIJOS, NIETOS, ETC Y SACAR TODAS LAS SUBASTAS RELACIONADAS.
 		$connection =  self::getConnection();
-		$sql = "SELECT * FROM Categoria WHERE CodCategoria = ".$codCategoria;
-		$result = $connection->query($sql);
-
-		// if($result){
-		// 	$
-		// }
-		
-
-		$sql = "SELECT * FROM Subasta WHERE CodProducto IN ";
-		$sql .="(SELECT CodProducto FROM Producto WHERE Categoria IN";
-		$sql.= "(SELECT CodCategoria FROM Categoria WHERE CodCategoria =".$codCategoria." OR CategoriaPadre = ".$codCategoria."))";
+		$categorias = self::getCategoriasDesde($codCategoria);
+		$stringCategorias = self::getStringCodCategorias($categorias);
+		$sql = "SELECT s.*, p.* FROM Subasta s, Producto p WHERE p.CodProducto = s.CodProducto AND p.CodProducto IN (SELECT CodProducto FROM Producto WHERE Categoria IN (".$stringCategorias."))";
 	}
 
 	public static function getSubastas($codVendedor){
@@ -323,13 +319,14 @@ class DbManager{
 				$sql .= "Subasta ";
 				$estado = "ACTIVA";
 				break;
-		}
-		$sql .= "(CodProducto, FechaInicio, FechaFin, Estado) VALUES (".$codProducto.",STR_TO_DATE('".$fechaInicio."',' %d %M %Y'), STR_TO_DATE('".$fechaFin."',' %d %M %Y'), '".$estado."')";
+		}//CAMBIAR ESTO LAS FECHAS DAN PROBLEMAS
+		$sql .= "(CodProducto, FechaInicio, FechaFin, Estado) VALUES (".$codProducto.",STR_TO_DATE('".$fechaInicio."',' /%Y%c/%d %k %i'), STR_TO_DATE('".$fechaFin."',' /%Y-%m-/%d %H:%i:%s'), '".$estado."')";
+		
 		$result = $connection->query($sql);
 		if($result){
-			return $result;
+			return $connection->insert_id;
 		}
-		return false;
+		return $sql;
 
 	}
 
@@ -365,6 +362,55 @@ class DbManager{
 		
 	}
 	
+	public static function getSubastasCompleta($codVendedor){
+		$connection = self::getConnection();
+		$sql = "SELECT s.codSubasta, s.codProducto, s.FechaInicio, s.FechaFin, s.Estado, p.Nombre, p.PrecioInicial,c.Nombre as Categoria, u.NickName, p.CodVendedor, p.Descripcion, i.img FROM Subasta s, Producto p, Categoria c, Usuario u, img i WHERE u.CodUsuario = p.CodVendedor AND p.CodProducto = s.codProducto AND i.CodProd = p.CodProducto AND p.Categoria = c.CodCategoria AND u.CodUsuario = ".$codVendedor;
+		$result = $connection->query($sql);
+
+
+		$codTemp = -1;
+		$subastas = [];
+		while ($row = $result->fetch_array()) {
+			if($codTemp != $row['codSubasta']){
+				$codTemp =  $row['codSubasta'];
+				$subastas[] = new SubastaCompleta($row);
+
+				$sql2 = "SELECT MAX(Cantidad) as PujaMax FROM Puja WHERE CodSubasta = ".$row['codSubasta'];
+				$result2 = $connection->query($sql2);
+				if($row2 = $result2->fetch_array()){
+					if($row2["PujaMax"] != null){
+						$subastas[count($subastas)-1]->setPujaMax($row2["PujaMax"]);
+					}else {
+						$subastas[count($subastas)-1]->setPujaMax("0");
+					}
+				}else{
+					$subastas[count($subastas)-1]->setPujaMax("0");
+				}
+			}else{
+				$subastas[count($subastas)-1]->addImg($row['img']);
+			}
+		}
+		return $subastas;
+
+	}
+
+	public static function getSubastaCompleta($codSubasta){
+		$connection = self::getConnection();
+		$sql = "SELECT s.codSubasta, s.codProducto, s.FechaInicio, s.FechaFin, s.Estado, p.Nombre, p.PrecioInicial,c.Nombre as Categoria, u.NickName, p.CodVendedor, p.Descripcion, i.img FROM Subasta s, Producto p, Categoria c, Usuario u, img i WHERE u.CodUsuario = p.CodVendedor AND p.CodProducto = s.codProducto AND i.CodProd = p.CodProducto AND p.Categoria = c.CodCategoria AND s.codSubasta = ".$codSubasta;
+		$result = $connection->query($sql);
+		if($result){
+			$subasta =null;
+			while($row = $result->fetch_array()){
+				if($subasta == null){
+					$subasta = new SubastaCompleta($row);
+				}else{
+					$subasta->addImg($row['img']);
+				}
+			}
+			return $subasta;
+		}
+		return -1;
+	}
 
 	/**
 		=============================================================================================================
@@ -439,21 +485,77 @@ class DbManager{
 		return $categorias;
 	}
 
-	public static function getCategoriaHijo($codPadre){
-		$connection =  self::getConnection();
-		$sql = "SELECT * FROM Categoria WHERE CodPadre = ". $codPadre;
+	public static function getCategoriasDesde($codCategoria){
+		$todo = [];
+		$connection = self::getConnection();
+		$sql2 = "SELECT CodCategoria, Nombre, CategoriaPadre FROM Categoria WHERE CodCategoria = " .$codCategoria;
+		$result2 = $connection->query($sql2);
 
-		$result = $connection->query($sql);
-		$hijas = [];
-		if($result){
-			while($row=$result->fetch_array()){
-				$hijas[] = new Categoria($row);
-			}
-			return $hijas;
+		while($row2 = $result2->fetch_array()){
+			$aux = new Categoria($row2);
+			$aux->setNombre(utf8_encode($aux->getNombre()));
+			$todo[] = $aux;
 		}
-		return false;
+
+		$sql = "SELECT CodCategoria, Nombre, CategoriaPadre FROM Categoria WHERE CategoriaPadre = " .$codCategoria;
+		$result = $connection->query($sql);
+		
+		if($result->num_rows > 0 ){
+			while($row = $result->fetch_array()){
+				foreach (self::getCategoriasDesde($row['CodCategoria']) as $cat) {
+					$todo[] = $cat;
+				}
+					 
+
+				
+			}
+		}
+		return $todo; 
 	}
 
+	private static function getStringCodCategorias($array){
+		$aux = [];
+		foreach ($array as $cat) {
+			$aux [] = $cat->getCodCategoria();
+		}
+		$devuelve = implode(", ",$aux);
+		return $devuelve;
+	}
+	/**
+		=============================================================================================================
+		|||||||||||||||||||||||||||||||||||||||||||||||||||| IMG ||||||||||||||||||||||||||||||||||||||||||||||||||||
+		=============================================================================================================
+	*/	
+	public static function insertImg($codProd, $url, $tipo=''){
+		$connection = self::getConnection();
+		$sql = "INSERT INTO img ";
+		switch ($tipo) {
+			case 'BASURA':
+				$sql .= "(CodProdBasura, ";
+				break;
+			case 'USADO':
+				$sql .= "(CodProdUsado, ";
+				break;
+			
+			default:
+				$sql .= "(CodProd, ";
+				break;
+		}
+		$sql .= "img) VALUES (".$codProd.",'".$url."')";
+		$result = $connection->query($sql);
+		if($result === TRUE){
+			return 1;
+		}
+		return -1;
+
+	}
+
+
+
+
 }
+
+
+
 
 ?>
