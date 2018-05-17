@@ -17,9 +17,14 @@ function dateAddDays( /*string yyyy/mm/dd*/ fechaString, /*int*/ diasExtra){
   var temp = fechaString;
   var newDate =  new Date(temp);
   newDate.setDate(newDate.getDate()+diasExtra || 1);
-  return [ newDate.getFullYear() 
+  var date = [[ newDate.getFullYear() 
           ,formatFechas(newDate.getMonth()+1, 10)
-          ,formatFechas(newDate.getDate(), 10)].join('-');
+          ,formatFechas(newDate.getDate(), 10)].join('-')
+	          ,[	formatFechas(newDate.getHours(),10)
+	          		,formatFechas(newDate.getMinutes(),10)
+	          	].join(":")
+	       ].join("\T");
+  return date;
 }
 
 function formatFechas(nr, base){
@@ -27,13 +32,11 @@ function formatFechas(nr, base){
   return len > 0? new Array(len).join('0') + nr : nr;
 }
 
-
-
-// CONTROLAR TEMA DE SUBIR LAS IMÁGENES 
 $("form#newSubasta").submit(function(e) {
     e.preventDefault();
     var nombre = $("#nombreProd").val().replace(/ /g,"_");
     var precio = $("#precio").val();
+    var desc = $("#desc").val();
 	var categoria = $("#cat").val();
 	var fechaInicio = $("#fInicio").val();
 	var fechaFin = $("#fFinal").val();
@@ -83,6 +86,7 @@ $("form#newSubasta").submit(function(e) {
 	}else{
 		$("#nombreProd").css({"border-color":""});
 	}
+	
 	if(Images && ficheros.length > 0){
 		
 		$.ajax({
@@ -93,15 +97,20 @@ $("form#newSubasta").submit(function(e) {
 			cache: false,
 			data:formData
 		}).done(function (data){
+			if(data)
 			imgsSubir = JSON.parse(data);
-			console.log(imgsSubir);
+			//console.log(imgsSubir);
 			if(todoBien){
 				$.ajax({
 					url: "./Controller/AuctionController.php",
 					method : "POST",
-					data:{"metodo" : "store", "nombreProd":nombre, "precio" : precio, "categoria" : categoria, "fInicio" : fechaInicio, "fFin":fechaFin, "image":(imgsSubir != undefined)?imgsSubir:"0" }
+					data:{"metodo" : "store", "nombreProd":nombre,"desc":desc, "precio" : precio, "categoria" : categoria, "fInicio" : fechaInicio, "fFin":fechaFin, "image":(imgsSubir != undefined)?imgsSubir:"0" }
 				}).done(function (response){
 					console.log(response);
+					$("cuerpo").load("./Controller/AuctionController.php",{"metodo":"principal"});
+
+				}).always(function(){
+					console.log("ENTRAR ENTRA");
 				});
 			}
 			
@@ -138,3 +147,8 @@ function isImage(filename) {
     }
     return false;
 }
+
+
+$(".subasta").on("click",function(evt){
+	$("cuerpo").load("./Controller/AuctionController.php",{"metodo":"expandSubasta","codSubasta":$(this).attr("cod")});
+});

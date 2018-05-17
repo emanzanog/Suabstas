@@ -7,8 +7,8 @@ class Subasta{
 	private $estado;
 
 	public function __construct($row){
-		$this->codSubasta = $row['CodSubasta'];
-		$this->codProducto = $row['CodProducto'];
+		$this->codSubasta = $row['codSubasta'];
+		$this->codProducto = $row['codProducto'];
 		$this->fechaInicio = $row['FechaInicio'];
 		$this->fechaFin = $row['FechaFin'];
 		$this->estado = $row['Estado'];	

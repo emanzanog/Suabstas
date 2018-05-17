@@ -17,6 +17,10 @@ if(!isset($_SESSION['sesion']['codUsuario'])){
 	<script type="text/javascript" src="./resources/js/jquery-3.3.1.min.js"></script>
 	<title>SUBASTAS BASTAS</title>
 	<style type="text/css">
+		html{
+			margin:0;
+			padding:0;
+		}
 		.nuevo{
 			border: 1px dashed red;
 		}
@@ -27,9 +31,6 @@ if(!isset($_SESSION['sesion']['codUsuario'])){
 			min-height: 500px;
 		}
 		.sugg{
-			/*border:1px solid black;
-			border-radius: 5px;
-			padding: 5px;*/
 			margin: 5px;
 		}
 	</style>
@@ -47,18 +48,18 @@ if(!isset($_SESSION['sesion']['codUsuario'])){
 		?>
 	</footer>
 	<script type="text/javascript">
-		var sesion = <?=isset($_SESSION['sesion'])?json_encode($_SESSION['sesion']):1;?> ;
+		
 		$(function(){
-			
+			//var sesion = <?=isset($_SESSION['sesion'])?json_encode($_SESSION['sesion']):1;?> ;
 			$("cuerpo").load("./view/prueba.php");
 			$("#mail").click(function(evt){
-				$("cuerpo").load("./Controller/MsgController.php",{"sesion":sesion,"metodo":"creaPantalla"});
+				$("cuerpo").load("./Controller/MsgController.php",{"metodo":"creaPantalla"});
 			});
 			$("#profile").click(function(evt){
-				$("cuerpo").load("./Controller/ProfileController.php",{"sesion":sesion,"metodo":"creaPantalla"});
+				$("cuerpo").load("./Controller/ProfileController.php",{"metodo":"creaPantalla"});
 			});
 			$("#upload").click(function(evt){
-				$("cuerpo").load("./Controller/AuctionController.php",{"sesion":sesion,"metodo":"principal"});
+				$("cuerpo").load("./Controller/AuctionController.php",{"metodo":"principal"});
 			});
 		})
 	</script>
