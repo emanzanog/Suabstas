@@ -1,15 +1,12 @@
 <?php
-
 require_once("../Model/dbmanager.php");
 require_once("../view/auction/AuctionView.php");
 session_start();
 class AuctionController{
-
 	public function __construct($metodo){
 		
 		// $this->$metodo();
 	}
-
 	public static function ejecuta($metodo){
 		self::$metodo();
 	}
@@ -32,7 +29,6 @@ class AuctionController{
 		$categorias =  DbManager::getCategorias();
 		echo AuctionView::newUpload($categorias);
 	}
-
 	public function expandSubasta(){
 		$codSubasta = $_POST['codSubasta'];
 		$subasta = DbManager::getSubastaCompleta($codSubasta);
@@ -41,9 +37,11 @@ class AuctionController{
 		}else{
 			echo "FALLO";
 		}
-
 	}
-
+	public function tiempoSubasta(){
+		$fecha = DbManager::getFF($_POST['codSubasta']);
+		echo json_encode(strtotime($fecha));
+	}
 	public function store(){
 		$codVendedor = $_SESSION['sesion']['codUsuario'];
 		$nombreProd = $_POST['nombreProd'];
@@ -76,36 +74,14 @@ class AuctionController{
 		}
 		
 		
-
-
 	}
 	
 	
 }
 if(isset($_POST['metodo'])){
-	$auctionController;
-	switch($_POST['metodo']){
-		case "principal":
-			$auctionController = AuctionController::ejecuta("principal");
-			break;
-		case "subasta":
-			$auctionController = AuctionController::ejecuta("subasta");
-			break;
-		case "newSubasta":
-			$auctionController = AuctionController::ejecuta("newSubasta");
-			break;
-		case "store":
-			$auctionController = AuctionController::ejecuta("store");
-			break;
-		case "expandSubasta":
-			$auctionController = AuctionController::ejecuta("expandSubasta");
-			break;
-		default:
-			break;
-	}
+AuctionController::ejecuta($_POST['metodo']);
+		
 }else{
 	header("Location: ../index.php");
 }
-
-
 ?>

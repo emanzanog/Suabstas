@@ -101,7 +101,7 @@ class AuctionView{
 
 	private static function cuadroSubasta($subasta, $num){
 
-		$html1 = '<div class="card-body subasta" cod="'.$subasta->getCodSubasta().'"><div class="row"><div class=" col-md-4"><div class="card-block"><div class="card-img" style="max-width:500px"><div class ="img-fluid img-thumbnail"><div id="carouselExampleIndicators'.$num.'" class="carousel slide" data-ride="carousel">
+		$html1 = '<div class="card-body subasta" ><div class="row"><div class=" col-md-4"><div class="card-block"><div class="card-img" style="max-width:500px"><div class ="img-fluid img-thumbnail"><div id="carouselExampleIndicators'.$num.'" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">';
 				for ($i=0; $i < count($subasta->getImg()); $i++) { 
 					if($i ==0){
@@ -134,7 +134,7 @@ class AuctionView{
 				</a>
 				</div></div></div></div></div>
 				'./*COSAS AQUÍ*/'
-				<div class="col-md-8">
+				<div class="col-md-8 datosSubasta" cod="'.$subasta->getCodSubasta().'">
 					<div class="card-block">
 						<h3 class="card-title">'.str_replace("_"," ",$subasta->getNombre()).'</h3>
 						<h6 class="card-text">DESCRIPCIÓN</h6>
@@ -203,8 +203,8 @@ class AuctionView{
 				<h3 class="card-title">'.$subastaC->getNombre().'</h3>
 				<h4>'.$subastaC->getPrecioInicial().'€</h4>
 				<p class="card-text">'.$subastaC->getDescripcion().'</p>
-				<span class="text-secondary">Fecha Subida: </span>'.$subastaC->getFechaInicio().'
-				4.0 stars
+				<span class="text-secondary">Tiempo Restante: </span><span id="tiempoRestante" data="'.$subastaC->getCodSubasta().'"><span id="dias">0</span> días, <span id="horas">0</span>:<span id="minutos">0</span>:<span id="segundos">0</span>
+				</span>
 				</div>
 				</div>
 				<div class="card card-outline-secondary my-4">
@@ -226,7 +226,8 @@ class AuctionView{
 				</div>
 				</div>
 			</div>
-		</div>';
+		</div>
+		<script type="text/javascript" src="./utils/cuentaTiempo.js"></script>';
 
 		return $html;
 	}

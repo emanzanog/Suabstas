@@ -216,6 +216,16 @@ class DbManager{
 		}
 		return $producto;
 	}
+	public static function getProductoByCod($codProd){
+		$connection =  self::getConnection();
+		$sql = "SELECT * FROM Producto WHERE CodProducto = ".$codProd;
+		$result = $connection->query($sql);
+		$producto = null ;
+		if($row = $result->fetch_array()){
+			$producto = new Producto($row);
+		}
+		return $producto;
+	}
 
 	public static function insertProducto($nombre,$desc, $precioInicial, $codVendedor, $categoria, $tipo = ""){
 		$connection =  self::getConnection();
@@ -256,7 +266,7 @@ class DbManager{
 
 
 		return $connection->insert_id;
-		//SELECCIONA PRODUCTO, BORRA SUBASTA RELACIONADA Y 
+		
 	}
 
 
@@ -303,6 +313,18 @@ class DbManager{
 		return "FALLO Obteniendo Subasta";
 	}
 
+	public static function getFF($codSubasta){
+		$connection = self::getConnection();
+		$sql = "SELECT FechaFin FROM Subasta WHERE CodSubasta =".$codSubasta;
+		$result = $connection->query($sql);
+		if($result){
+			$row = $result->fetch_array();
+			return $row["FechaFin"];
+		}else{
+			return -1;
+		}
+
+	}
 	public static function insertSubasta($codProducto, $fechaInicio, $fechaFin,  $tabla = ""){
 		$connection =  self::getConnection();
 		$sql = "INSERT INTO ";
@@ -320,7 +342,7 @@ class DbManager{
 				$estado = "ACTIVA";
 				break;
 		}//CAMBIAR ESTO LAS FECHAS DAN PROBLEMAS
-		$sql .= "(CodProducto, FechaInicio, FechaFin, Estado) VALUES (".$codProducto.",STR_TO_DATE('".$fechaInicio."',' /%Y%c/%d %k %i'), STR_TO_DATE('".$fechaFin."',' /%Y-%m-/%d %H:%i:%s'), '".$estado."')";
+		$sql .= "(CodProducto, FechaInicio, FechaFin, Estado) VALUES (".$codProducto.",STR_TO_DATE('".$fechaInicio."',' %Y-%m-%d\T%H:%i:%s'), STR_TO_DATE('".$fechaFin."',' %Y-%m-%d\T%H:%i:%s'), '".$estado."')";
 		
 		$result = $connection->query($sql);
 		if($result){
@@ -364,7 +386,7 @@ class DbManager{
 	
 	public static function getSubastasCompleta($codVendedor){
 		$connection = self::getConnection();
-		$sql = "SELECT s.codSubasta, s.codProducto, s.FechaInicio, s.FechaFin, s.Estado, p.Nombre, p.PrecioInicial,c.Nombre as Categoria, u.NickName, p.CodVendedor, p.Descripcion, i.img FROM Subasta s, Producto p, Categoria c, Usuario u, img i WHERE u.CodUsuario = p.CodVendedor AND p.CodProducto = s.codProducto AND i.CodProd = p.CodProducto AND p.Categoria = c.CodCategoria AND u.CodUsuario = ".$codVendedor;
+		$sql = "SELECT s.codSubasta, s.codProducto, s.FechaInicio, s.FechaFin, s.Estado, p.Nombre, p.PrecioInicial,c.Nombre as Categoria, u.NickName, p.CodVendedor, p.Descripcion, i.img FROM Subasta s, Producto p, Categoria c, Usuario u, img i WHERE u.CodUsuario = p.CodVendedor AND s.Estado = 'ACTIVA' AND p.CodProducto = s.codProducto AND i.CodProd = p.CodProducto AND p.Categoria = c.CodCategoria AND u.CodUsuario = ".$codVendedor;
 		$result = $connection->query($sql);
 
 
@@ -439,11 +461,38 @@ class DbManager{
 		}
 		return false;
 	}
-	public function getPujas($codPujador){
+	public static function getPujasHechas($codPujador){
 		$connection =  self::getConnection();
 		$sql = "SELECT * FROM Puja WHERE CodPujador = ".$codPujador;
 		$result = $connection->query($sql);
-		return $result;
+		$pujas=[];
+		if($result){
+			while($row=$result->fetch_array()){
+				$pujas[] = new Puja($row); 
+			}
+		}
+		return $pujas;
+	}
+
+	public static function getPujas($codSubasta){
+		$connection =  self::getConnection();
+		$sql = "SELECT * FROM Puja WHERE CodSubasta = ".$codSubasta;
+		$result = $connection->query($sql);
+		$pujas=[];
+		if($result){
+			while($row=$result->fetch_array()){
+				$pujas[] = new Puja($row); 
+			}
+		}
+		return $pujas;
+	}
+	//TODO HACER....
+	public static function deletePuja($codPuja){
+
+	}
+
+	public static function movePuja($puja,$tabla){
+
 	}
 
 	public static function deletePujas($codSubasta){

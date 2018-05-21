@@ -149,6 +149,6 @@ function isImage(filename) {
 }
 
 
-$(".subasta").on("click",function(evt){
+$(".datosSubasta").on("click",function(evt){
 	$("cuerpo").load("./Controller/AuctionController.php",{"metodo":"expandSubasta","codSubasta":$(this).attr("cod")});
 });
